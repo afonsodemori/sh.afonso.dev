@@ -21,12 +21,20 @@ __bash_prompt
 
 alias ll='ls --color -alF'
 
-printf "\n[?] Install additional shortcuts? (be careful)\n[^C to cancel]\a\n\n"
-read -r
-alias c='clear'
-alias gs='git status'
-alias gc='git checkout'
-alias gd='git diff'
-alias ga='git add'
-alias gl='git log'
-alias glo='git log --oneline'
+printf "=> Set up additional aliases? (be careful) [Y/n]: \a"
+read -r answer
+if [[ "$answer" != 'n' ]] && [[ "$answer" != 'N' ]]; then
+  alias c='clear'
+  alias gs='git status'
+  alias gc='git checkout'
+  alias gd='git diff'
+  alias ga='git add'
+  alias gl='git log'
+  alias glo='git log --oneline'
+fi
+
+printf "=> Install git completion? [Y/n]: \a"
+read -r answer
+if [[ "$answer" != 'n' ]] && [[ "$answer" != 'N' ]]; then
+  source <(curl -s https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash)
+fi
